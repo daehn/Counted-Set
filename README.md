@@ -1,6 +1,6 @@
 # CountedSet
 
- [![codecov.io](https://codecov.io/github/daehn/CountedSet/coverage.svg?branch=develop)](https://codecov.io/github/daehn/CountedSet?branch=develop) ![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)
+[![Build Status](https://travis-ci.org/daehn/CountedSet.svg?branch=develop)](https://travis-ci.org/daehn/CountedSet) [![codecov.io](https://codecov.io/github/daehn/Counted-Set/coverage.svg?branch=develop)](https://codecov.io/github/daehn/Counted-Set?branch=develop) ![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Minimal implementation of a counted Set in Swift.
