@@ -1,0 +1,7 @@
+language: objective-c
+osx_image: xcode8
+
+script:
+  - set -o pipefail
+  - xcodebuild build test -scheme CountedSet -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.0' | xcpretty
+  - bash <(curl -s https://codecov.io/bash)
