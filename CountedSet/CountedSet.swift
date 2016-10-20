@@ -55,7 +55,6 @@ public struct CountedSet<Element : Hashable> : ExpressibleByArrayLiteral {
         return count(for: member)
     }
 
-
     public func mostFrequent() -> ElementWithCount? {
         guard !backing.isEmpty else { return nil }
         return reduce((backing[backing.startIndex], UInt(0))) { max, current in
