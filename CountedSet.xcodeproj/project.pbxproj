@@ -11,6 +11,7 @@
 		AF4300B01C9C980800D26703 /* CountedSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF4300A51C9C980700D26703 /* CountedSet.framework */; };
 		AF4300B51C9C980800D26703 /* CountedSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4300B41C9C980800D26703 /* CountedSetTests.swift */; };
 		AF4300C01C9C981300D26703 /* CountedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4300BF1C9C981300D26703 /* CountedSet.swift */; };
+		AF441F1E1E4900F300DD008C /* HashHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF441F1D1E4900F300DD008C /* HashHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		AF4300B41C9C980800D26703 /* CountedSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountedSetTests.swift; sourceTree = "<group>"; };
 		AF4300B61C9C980800D26703 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF4300BF1C9C981300D26703 /* CountedSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountedSet.swift; sourceTree = "<group>"; };
+		AF441F1D1E4900F300DD008C /* HashHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				AF4300B41C9C980800D26703 /* CountedSetTests.swift */,
+				AF441F1D1E4900F300DD008C /* HashHelper.swift */,
 				AF4300B61C9C980800D26703 /* Info.plist */,
 			);
 			path = CountedSetTests;
@@ -208,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF4300B51C9C980800D26703 /* CountedSetTests.swift in Sources */,
+				AF441F1E1E4900F300DD008C /* HashHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

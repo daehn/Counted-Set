@@ -27,24 +27,24 @@ public struct CountedSet<Element : Hashable> : ExpressibleByArrayLiteral {
     public typealias Index = SetIndex<Element>
 
     fileprivate var backing = Set<Element>()
-    fileprivate var countByHash = [Int: UInt]()
+    fileprivate var countByElement = [Element: UInt]()
 
     public mutating func insert(_ member: Element) {
         backing.insert(member)
-        let count = countByHash[member.hashValue] ?? 0
-        countByHash[member.hashValue] = count + 1
+        let count = countByElement[member] ?? 0
+        countByElement[member] = count + 1
     }
 
     @discardableResult public mutating func remove(_ member: Element) -> Element? {
-        guard var count = countByHash[member.hashValue], count > 0 else { return nil }
+        guard var count = countByElement[member], count > 0 else { return nil }
         count -= 1
-        countByHash[member.hashValue] = Swift.max(count, 0)
+        countByElement[member] = Swift.max(count, 0)
         if count <= 0 { backing.remove(member) }
         return member
     }
 
     public func count(for member: Element) -> UInt? {
-        return countByHash[member.hashValue]
+        return countByElement[member]
     }
 
     public init(arrayLiteral elements: Element...) {
@@ -96,7 +96,7 @@ extension CountedSet: Collection {
 extension CountedSet: Hashable {
 
     public var hashValue: Int {
-        return backing.hashValue ^ Int(countByHash.values.reduce(0, ^))
+        return backing.hashValue ^ Int(countByElement.values.reduce(0, ^))
     }
 
 }
@@ -104,7 +104,7 @@ extension CountedSet: Hashable {
 // MARK: - Equatable Operator
 
 public func ==<Element>(lhs: CountedSet<Element>, rhs: CountedSet<Element>) -> Bool {
-    return lhs.backing == rhs.backing && lhs.countByHash == rhs.countByHash
+    return lhs.backing == rhs.backing && lhs.countByElement == rhs.countByElement
 }
 
 // MARK: - CustomStringConvertible
