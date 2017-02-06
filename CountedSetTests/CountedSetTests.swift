@@ -201,6 +201,45 @@ class CountedSetTests: XCTestCase {
         XCTAssertEqual(sut["Baz"], 1)
     }
 
+    func testThatItDoesNotAddTheCountsForElementsWithTheSameHash() {
+        // given
+        let first = HashHelper(hashValue: 1, name: "first")
+        let second = HashHelper(hashValue: 2, name: "second")
+
+        var sut = CountedSet(arrayLiteral: first, second)
+
+        // then
+        XCTAssertEqual(sut.count(for: first), 1)
+        XCTAssertEqual(sut.count(for: second), 1)
+
+        // when
+        let third = HashHelper(hashValue: 1, name: "third")
+        sut.insert(third)
+
+        // then
+        XCTAssertEqual(sut.count(for: first), 1)
+        XCTAssertEqual(sut.count(for: second), 1)
+        XCTAssertEqual(sut.count(for: third), 1)
+    }
+
+    func testThatItDoesAddTheCountsForElementsWithTheSameIdentity() {
+        // given
+        let first = HashHelper(hashValue: 1, name: "first")
+
+        var sut = CountedSet(arrayLiteral: first)
+
+        // then
+        XCTAssertEqual(sut.count(for: first), 1)
+
+        // when
+        let second = HashHelper(hashValue: 1, name: "first")
+        sut.insert(second)
+
+        // then
+        XCTAssertEqual(sut.count(for: first), 2)
+        XCTAssertEqual(sut.count(for: second), 2)
+    }
+
     func testThatItReturnsNilIfTheElementIsNotInTheSetWhenSubscipted() {
         // given
         sut = CountedSet(arrayLiteral: "Foo", "Bar")
