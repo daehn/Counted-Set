@@ -55,8 +55,8 @@ class CountedSetTests: XCTestCase {
         XCTAssertEqual(sut.count(for: "Hello"), 3)
     }
 
-    func testThatItReturnsNilAsElementCountForElementsNotInTheSet() {
-        XCTAssertNil(sut.count(for: "Hello"))
+    func testThatItReturnsZeroAsElementCountForElementsNotInTheSet() {
+        XCTAssertEqual(sut.count(for: "Hello"), 0)
     }
 
     func testThatItDecreasesTheCountWhenAddingAnElementMultipleTimes() {
@@ -240,11 +240,44 @@ class CountedSetTests: XCTestCase {
         XCTAssertEqual(sut.count(for: second), 2)
     }
 
-    func testThatItReturnsNilIfTheElementIsNotInTheSetWhenSubscipted() {
+    func testThatItReturnsZeroIfTheElementIsNotInTheSetWhenSubscipted() {
         // given
         sut = CountedSet(arrayLiteral: "Foo", "Bar")
         // then
-        XCTAssertNil(sut["Baz"])
+        XCTAssertEqual(sut["Baz"], 0)
+    }
+    
+    func testThatItReturnsFalseWhenSettingCountForNonContainedElement() {
+        // given
+        sut = CountedSet(arrayLiteral: "Foo", "Bar")
+        // then
+        XCTAssertFalse(sut.setCount(2, for: "Baz"))
+    }
+    
+    func testThatItReturnsTrueWhenSettingCountForContainedElement() {
+        // given
+        sut = CountedSet(arrayLiteral: "Foo", "Bar")
+        // then
+        XCTAssertTrue(sut.setCount(2, for: "Foo"))
+    }
+    
+    func testThatItSetsTheNewCountWhenSettingCountForContainedElement() {
+        // given
+        sut = CountedSet(arrayLiteral: "Foo", "Bar")
+        // when
+        XCTAssertTrue(sut.setCount(2, for: "Foo"))
+        // then
+        XCTAssertEqual(sut.count(for: "Foo"), 2)
+    }
+    
+    func testThatItRemovesElementFrombackingStoreWhenSettingCountForContainedElementToZero() {
+        // given
+        sut = CountedSet(arrayLiteral: "Foo", "Bar")
+        // when
+        XCTAssertTrue(sut.setCount(0, for: "Foo"))
+        // then
+        XCTAssertFalse(sut.contains("Foo"))
+        XCTAssertEqual(sut.count(for: "Foo"), 0)
     }
 
     func testThePerformanceOfAdding_10000_ElementsToTheCountedSet() {
