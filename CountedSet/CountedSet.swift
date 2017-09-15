@@ -23,11 +23,11 @@
 
 public struct CountedSet<Element : Hashable> : ExpressibleByArrayLiteral {
 
-    public typealias ElementWithCount = (element: Element, count: UInt)
+    public typealias ElementWithCount = (element: Element, count: Int)
     public typealias Index = SetIndex<Element>
 
     fileprivate var backing = Set<Element>()
-    fileprivate var countByElement = [Element: UInt]()
+    fileprivate var countByElement = [Element: Int]()
 
     public mutating func insert(_ member: Element) {
         backing.insert(member)
@@ -43,23 +43,32 @@ public struct CountedSet<Element : Hashable> : ExpressibleByArrayLiteral {
         return member
     }
 
-    public func count(for member: Element) -> UInt? {
-        return countByElement[member]
+    public func count(for member: Element) -> Int {
+        return countByElement[member] ?? 0
     }
 
     public init(arrayLiteral elements: Element...) {
         elements.forEach { insert($0) }
     }
 
-    public subscript(member: Element) -> UInt? {
+    public subscript(member: Element) -> Int {
         return count(for: member)
+    }
+    
+    @discardableResult public mutating func setCount(_ count: Int, for element: Element) -> Bool {
+        precondition(count >= 0, "Count has to be positive")
+        guard contains(element) else { return false }
+        countByElement[element] = count
+        if count <= 0 { backing.remove(element) }
+        return true
     }
 
     public func mostFrequent() -> ElementWithCount? {
         guard !backing.isEmpty else { return nil }
-        return reduce((backing[backing.startIndex], UInt(0))) { max, current in
-            guard let count = count(for: current), count > max.1 else { return max }
-            return (current, count)
+        return reduce((backing[backing.startIndex], 0)) { max, current in
+            let currentCount = count(for: current)
+            guard currentCount > max.1 else { return max }
+            return (current, currentCount)
         }
     }
 
@@ -113,7 +122,7 @@ extension CountedSet: CustomStringConvertible {
 
     public var description: String {
         return backing.reduce("<CountedSet>:\n") { sum, element in
-            sum + "\t- \(element) : \(count(for: element)!)x\n"
+            sum + "\t- \(element) : \(count(for: element))x\n"
         }
     }
     
