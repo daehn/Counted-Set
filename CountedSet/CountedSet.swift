@@ -55,8 +55,10 @@ public struct CountedSet<Element : Hashable> : ExpressibleByArrayLiteral {
         return count(for: member)
     }
     
-    public mutating func setCount(_ count: Int, for element: Element) {
+    @discardableResult public mutating func setCount(_ count: Int, for element: Element) -> Bool {
         precondition(count >= 0, "Count has to be positive")
+        guard count != countByElement[element] else { return false }
+
         if count > 0 && !contains(element) {
             backing.insert(element)
         }
@@ -64,6 +66,7 @@ public struct CountedSet<Element : Hashable> : ExpressibleByArrayLiteral {
         if count <= 0 {
             backing.remove(element)
         }
+        return true
     }
 
     public func mostFrequent() -> ElementWithCount? {
