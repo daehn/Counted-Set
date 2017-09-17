@@ -5,7 +5,7 @@
 
 Minimal implementation of a counted Set in Swift.
 
-Start by creating a `CountedSet` instance using a `Hashable` element type and by adding and removing objects:
+We start by creating a `CountedSet` instance using a `Hashable` element type and by adding and removing objects:
 
 ```swift
 let words = CountedSet<String>()
@@ -15,7 +15,7 @@ words.insert("Hello")
 words.remove("World")
 ```
 
-You can ask the `CountedSet` for the count of an element, which is also possible using subscripting:
+We can ask the `CountedSet` for the count of an element, which is also possible using subscripting:
 
 ```swift
 let helloCount = words.count(for: "Hello") // 2
@@ -29,4 +29,11 @@ Access the most occurring element and its count, which will be returned as an op
 if let (element, count) = words.mostFrequent() {
     // Do something with element and count
 }
+```
+
+It is also possible to set a specific count for an element directly (to avoid having to insert it multiple times for example).
+This operation returns a `Bool` specifying whether or not the count changed:
+
+```swift
+let changed = words.setCount(42, for: "Result")
 ```
