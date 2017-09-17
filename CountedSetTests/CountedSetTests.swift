@@ -308,5 +308,25 @@ class CountedSetTests: XCTestCase {
             XCTAssertEqual(sut.count(for: $0), 1000)
         }
     }
+
+    func testThatItReturnsAValidDescription() {
+        // given
+        sut = CountedSet(arrayLiteral: "Foo", "Bar", "Foo")
+        let expected = "<CountedSet>:\n\t- Foo: 2\n\t- Bar: 1\n"
+
+        // then
+        XCTAssertEqual(sut.description, expected)
+    }
+
+    func testThatItReturnsDistinctHashValues() {
+        // given
+        let sut1 = CountedSet(arrayLiteral: "Foo", "Bar", "Foo")
+        let sut2 = CountedSet(arrayLiteral: "Foo", "Foo", "Bar")
+        let sut3 = CountedSet(arrayLiteral: "Foo", "Bar")
+
+        // then
+        XCTAssertEqual(sut1.hashValue, sut2.hashValue)
+        XCTAssertNotEqual(sut2.hashValue, sut3.hashValue)
+    }
     
 }

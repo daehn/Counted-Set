@@ -128,7 +128,7 @@ extension CountedSet: CustomStringConvertible {
 
     public var description: String {
         return backing.reduce("<CountedSet>:\n") { sum, element in
-            sum + "\t- \(element) : \(count(for: element))x\n"
+            sum + "\t- \(element): \(count(for: element))\n"
         }
     }
     
