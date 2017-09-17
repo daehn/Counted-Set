@@ -242,14 +242,14 @@ class CountedSetTests: XCTestCase {
 
     func testThatItReturnsZeroIfTheElementIsNotInTheSetWhenSubscipted() {
         // given
-        sut = CountedSet(arrayLiteral: "Foo", "Bar")
+        sut = ["Foo", "Bar"]
         // then
         XCTAssertEqual(sut["Baz"], 0)
     }
     
     func testThatItAddsANonExistentElementWhenSettingCount() {
         // given
-        sut = CountedSet(arrayLiteral: "Foo", "Bar")
+        sut = ["Foo", "Bar"]
         // when
         sut.setCount(2, for: "Baz")
         // then
@@ -259,7 +259,7 @@ class CountedSetTests: XCTestCase {
     
     func testThatItSetsTheNewCountWhenSettingCountForContainedElement() {
         // given
-        sut = CountedSet(arrayLiteral: "Foo", "Bar")
+        sut = ["Foo", "Bar"]
         // when
         XCTAssert(sut.setCount(3, for: "Foo"))
         // then
@@ -268,21 +268,21 @@ class CountedSetTests: XCTestCase {
 
     func testThatItReturnsFalseWhenSettingExistingCount() {
         // given
-        sut = CountedSet(arrayLiteral: "Foo", "Bar", "Foo")
+        sut = ["Foo", "Bar", "Foo"]
         // then
         XCTAssertFalse(sut.setCount(2, for: "Foo"))
     }
 
     func testThatItReturnsTrueWhenSettingCountForElementWithDifferentExistingCount() {
         // given
-        sut = CountedSet(arrayLiteral: "Foo", "Bar")
+        sut = ["Foo", "Bar"]
         // then
         XCTAssert(sut.setCount(2, for: "Foo"))
     }
     
     func testThatItRemovesElementFrombackingStoreWhenSettingCountForContainedElementToZero() {
         // given
-        sut = CountedSet(arrayLiteral: "Foo", "Bar")
+        sut = ["Foo", "Bar"]
         // when
         XCTAssert(sut.setCount(0, for: "Foo"))
         // then

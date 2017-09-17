@@ -20,8 +20,7 @@
 // OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-public struct CountedSet<Element : Hashable> : ExpressibleByArrayLiteral {
+public struct CountedSet<Element: Hashable>: ExpressibleByArrayLiteral {
 
     public typealias ElementWithCount = (element: Element, count: Int)
     public typealias Index = SetIndex<Element>
