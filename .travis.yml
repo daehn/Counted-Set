@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode9
+osx_image: xcode10
 
 env:
   - CODECOV_TOKEN=052f3a87-aeca-4e0b-8891-a39dd3338160
